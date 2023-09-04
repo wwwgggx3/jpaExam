@@ -43,6 +43,7 @@ public class ProductEntity extends BaseEntity {
 
     //ProductEntity에는 FK 안생기고 ProductDetailEntity와 관계 설정
     @OneToOne(mappedBy = "productEntity", cascade = { CascadeType.PERSIST } ) //mappedBy 는 fk 안들어가고 싶은 곳에 들어가면 됨 //@OneToOne(mappedBy = "productEntity")
+    @ToString.Exclude
     private ProductDetailEntity productDetailEntity;
     /*
      @OneToOne(mappedBy = "productEntity", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, orphanRemoval = true)
@@ -62,6 +63,8 @@ public class ProductEntity extends BaseEntity {
         this.productDetailEntity = productDetailEntity;
         this.productDetailEntity.setProductEntity(this);
     }
+
+
 
     //    //사용자가 등록, 수정하는 테이블이면 등록일시, 수정일시 들어간다고 보면 됨
 //    @CreationTimestamp

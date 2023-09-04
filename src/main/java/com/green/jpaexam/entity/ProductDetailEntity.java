@@ -27,6 +27,8 @@ public class ProductDetailEntity extends BaseEntity {
     @Column(nullable = true, length = 255)
     private String description;
 
+
+
 //    @OneToOne
 //    @JoinColumn(name = "product_number")
 //    private ProductEntity productEntity;

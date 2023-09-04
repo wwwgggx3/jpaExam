@@ -5,6 +5,7 @@ import com.green.jpaexam.entity.ProductDetailEntity;
 import com.green.jpaexam.product.model.*;
 import com.green.jpaexam.provider.ProviderRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -49,7 +51,7 @@ public class ProductService {
                 .decription(productDetailEntity.getDescription())
                 .categoryNm(productEntity.getCateogryEntity().getName())
                 .providerNm(productEntity.getProviderEntity().getName())
-                .createdAt(productEntity.getCreatedAt())
+//                .createdAt(productEntity.getCreatedAt())
                 .build();
 
         /*
@@ -109,6 +111,13 @@ public class ProductService {
                 ).toList();
         return result;
         */
+    }
+
+    public List<ProductRes> getProductAllJpql(Pageable pageable, ProductSelAllParam param) {
+//        List<ProductRes> list = productRep.selProductAll(pageable, "등록테스트777", 100_000);
+//        List<ProductRes> list = productRep.selProductAll(pageable, param);
+//        log.info("list : {}", list); //에러터지면 이거 주석
+        return list;
     }
 
     public ProductRes getProduct(Long number) {

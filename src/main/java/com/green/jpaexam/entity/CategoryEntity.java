@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -27,7 +28,8 @@ public class CategoryEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "cateogryEntity")
-    private List<ProductEntity> productEntityList;
+    @Builder.Default
+    @OneToMany(mappedBy = "cateogryEntity") // 1:N관계에서 N쪽(주인)에 fk가 들어가는데. 주인이 아닌 entity에서 양방향에서 걸 때 테이블이 따로 안만들어지게 하는 것
+    private List<ProductEntity> productEntityList = new ArrayList();
 
 }
