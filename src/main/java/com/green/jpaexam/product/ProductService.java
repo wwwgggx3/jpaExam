@@ -23,6 +23,7 @@ public class ProductService {
     private final ProviderRepository providerRep;
     private final ProductRepository productRep;
     private final ProductDetailRepository productDetailRep;
+    private final ProductQdsl productQdsl;
 
     public ProductRes saveProduct(ProductDto dto) {
 
@@ -114,10 +115,14 @@ public class ProductService {
     }
 
     public List<ProductRes> getProductAllJpql(Pageable pageable, ProductSelAllParam param) {
-        List<ProductRes> list = productRep.selProductAll(pageable, "등록테스트777", 100_000);
-//        List<ProductRes> list = productRep.selProductAll(pageable, param);
+//        List<ProductRes> list = productRep.selProductAll(pageable, "등록테스트777", 100_000);
+        List<ProductRes> list = productRep.selProductAll(pageable, param);
         log.info("list : {}", list); //에러터지면 이거 주석
         return list;
+    }
+
+    public List<ProductResQdsl> getProductAllQdsl() {
+        return productQdsl.selProductAll();
     }
 
     public ProductRes getProduct(Long number) {

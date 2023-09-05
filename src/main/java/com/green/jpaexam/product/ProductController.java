@@ -1,8 +1,6 @@
 package com.green.jpaexam.product;
 
-import com.green.jpaexam.product.model.ProductDto;
-import com.green.jpaexam.product.model.ProductRes;
-import com.green.jpaexam.product.model.ProductUpdDto;
+import com.green.jpaexam.product.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,11 +35,16 @@ public class ProductController {
     }
 
 // 깃보고 코드 수정
-//    @GetMapping("/jpql")
-//    public ResponseEntity<List<ProductRes>> getProductAllJpql(
-//            @PageableDefault(sort="number", direction = Sort.Direction.DESC, size = 20) Pageable pageable, @RequestParam ProductSelAllParam param) {
-//        return ResponseEntity.ok(service.getProductAllJpql(pageable, param));
-//    }
+    @GetMapping("/jpql")
+    public ResponseEntity<List<ProductRes>> getProductAllJpql(
+            @PageableDefault(sort="number", direction = Sort.Direction.DESC, size = 20) Pageable pageable, @RequestParam ProductSelAllParam param) {
+        return ResponseEntity.ok(service.getProductAllJpql(pageable, param));
+    }
+
+    @GetMapping("/qdsl")
+    public ResponseEntity<List<ProductResQdsl>> getProductAllQdsl() {
+        return ResponseEntity.ok(service.getProductAllQdsl());
+    }
 
 
 

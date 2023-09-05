@@ -14,11 +14,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class ProductDaoImpl implements ProductDao{
 
     private final ProductRepository rep;
 
+    public ProductDaoImpl(ProductRepository rep) {
+        this.rep = rep;
+    }
 
     @Override
     public ProductRes saveProduct(ProductEntity p) {
