@@ -36,12 +36,14 @@ public class ProductController {
         return ResponseEntity.ok(service.getProductAll(page)); //ok는 200코드
     }
 
+// 깃보고 코드 수정
+//    @GetMapping("/jpql")
+//    public ResponseEntity<List<ProductRes>> getProductAllJpql(
+//            @PageableDefault(sort="number", direction = Sort.Direction.DESC, size = 20) Pageable pageable, @RequestParam ProductSelAllParam param) {
+//        return ResponseEntity.ok(service.getProductAllJpql(pageable, param));
+//    }
 
-    @GetMapping("/jpql")
-    public ResponseEntity<List<ProductRes>> getProductAllJpql(
-            @PageableDefault(sort="number", direction = Sort.Direction.DESC, size = 20) Pageable pageable, @RequestParam ProductSelAllParam param) {
-        return ResponseEntity.ok(service.getProductAllJpql(pageable, param));
-    }
+
 
     @GetMapping("/{number}")
     public ResponseEntity<ProductRes> getProduct(Long number) {

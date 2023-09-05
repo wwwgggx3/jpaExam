@@ -29,6 +29,7 @@ public class ProviderEntity extends BaseEntity {
     @OneToMany(mappedBy = "providerEntity", cascade = CascadeType.PERSIST) //(mappedBy = "providerEntity") 입력하면 db에 t_provider_product_entity_list 테이블이 안생김
 //    @JoinColumn(name = "provider_id")
     @ToString.Exclude
+    @Builder.Default
     private List<ProductEntity> productEntityList = new ArrayList<>();
 
 //    @OneToOne
