@@ -10,7 +10,7 @@ public class ProductResQdsl {
     private String name;
     private int price;
     private int stock;
-    private String decription;
+    private String description;
     private String categoryNm;
     private String providerNm;
     private LocalDateTime createdAt;

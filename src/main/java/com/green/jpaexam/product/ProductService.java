@@ -121,7 +121,7 @@ public class ProductService {
         return list;
     }
 
-    public List<ProductResQdsl> getProductAllQdsl() {
+    public List<ProductResQdsl> getProductAllQdsl(Pageable pageable) {
         return productQdsl.selProductAll();
     }
 

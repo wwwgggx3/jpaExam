@@ -2,6 +2,7 @@ package com.green.jpaexam.product;
 
 import com.green.jpaexam.product.model.*;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -40,10 +41,11 @@ public class ProductController {
             @PageableDefault(sort="number", direction = Sort.Direction.DESC, size = 20) Pageable pageable, @RequestParam ProductSelAllParam param) {
         return ResponseEntity.ok(service.getProductAllJpql(pageable, param));
     }
-
+    //@ParameterObject 넣으면 @PageableDefault의 디폴트값이 스웨거에 디폴트값으로 들어감
     @GetMapping("/qdsl")
-    public ResponseEntity<List<ProductResQdsl>> getProductAllQdsl() {
-        return ResponseEntity.ok(service.getProductAllQdsl());
+    public ResponseEntity<List<ProductResQdsl>> getProductAllQdsl(
+            @ParameterObject @PageableDefault(sort="number", direction = Sort.Direction.DESC, page = 0, size = 20) Pageable pageable) {
+        return ResponseEntity.ok(service.getProductAllQdsl(pageable));
     }
 
 
