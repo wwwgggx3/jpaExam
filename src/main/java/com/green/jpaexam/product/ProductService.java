@@ -122,7 +122,7 @@ public class ProductService {
     }
 
     public List<ProductResQdsl> getProductAllQdsl(Pageable pageable) {
-        return productQdsl.selProductAll();
+        return productQdsl.selProductAll(pageable);
     }
 
     public ProductRes getProduct(Long number) {

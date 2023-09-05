@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -60,16 +61,21 @@ public class ProductQdsl {
         return query.fetch();
     }
 
-    private List<OrderSpecifier> getAllOrderSpecifiers(Pageable pageable) {
-        List<OrderSpecifier> orders = new ArrayList();
+    private OrderSpecifier[] getAllOrderSpecifiers(Pageable pageable) {
+//        List<OrderSpecifier> orders = new ArrayList();
+        List<OrderSpecifier> orders = new LinkedList<>();
         if(!pageable.getSort().isEmpty()) {
             for(Sort.Order order : pageable.getSort()) {
                Order direction = order.getDirection().isAscending() ? Order.ASC : Order.DESC;
-//               OrderSpecifier orderId = QuerydslUtil
+               //order의 property값이 스웨거 입력칸 sort의 number
+               switch (order.getProperty().toLowerCase()) {
+                   case "number": orders.add(new OrderSpecifier(direction, p.number)); break;
+                   case "product_name": orders.add(new OrderSpecifier(direction, p.name)); break;
+                   case "price": orders.add(new OrderSpecifier(direction, p.price)); break;
+               }
             }
         }
-
-        return orders;
+        return orders.stream().toArray(OrderSpecifier[]::new);
     }
 
 }
