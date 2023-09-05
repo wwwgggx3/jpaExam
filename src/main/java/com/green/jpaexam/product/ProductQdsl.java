@@ -50,7 +50,8 @@ public class ProductQdsl {
                 .join(p.productDetailEntity, pd)
                 .join(p.cateogryEntity, c)
                 .join(p.providerEntity, pv)
-                .orderBy(p.number.desc())
+//                .orderBy(p.number.desc())
+                .orderBy(getAllOrderSpecifiers(pageable))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize());
 
