@@ -44,8 +44,8 @@ public class ProductController {
     //@ParameterObject 넣으면 @PageableDefault의 디폴트값이 스웨거에 디폴트값으로 들어감
     @GetMapping("/qdsl")
     public ResponseEntity<List<ProductResQdsl>> getProductAllQdsl(
-            @ParameterObject @PageableDefault(sort="number", direction = Sort.Direction.DESC, page = 0, size = 20) Pageable pageable) {
-        return ResponseEntity.ok(service.getProductAllQdsl(pageable));
+            @ParameterObject @PageableDefault(sort="number", direction = Sort.Direction.DESC, page = 0, size = 20) Pageable pageable, String search) {
+        return ResponseEntity.ok(service.getProductAllQdsl(pageable, search));
     }
 
 

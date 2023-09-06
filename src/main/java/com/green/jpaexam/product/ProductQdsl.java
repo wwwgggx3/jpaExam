@@ -4,6 +4,7 @@ import com.green.jpaexam.entity.QCategoryEntity;
 //import com.green.jpaexam.entity.QProductDetailEntity;
 import com.green.jpaexam.entity.QProductDetailEntity;
 import com.green.jpaexam.product.model.*;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
@@ -34,12 +35,23 @@ public class ProductQdsl {
     private final QProductDetailEntity pd = QProductDetailEntity.productDetailEntity;
 
 
-    public List<ProductResQdsl> selProductAll(Pageable pageable) {
+    public List<ProductResQdsl> selProductAll(Pageable pageable, String search) {
 
 //        QProductDetailEntity pd = productDetailEntity;
 
 
 //        List<ProductEntity> list = jpaQueryFactory.selectFrom(p).fetch();
+/*
+        BooleanBuilder whereBuilder = new BooleanBuilder();
+        if(search != null) {
+            whereBuilder.and(p.name.contains(search));
+        }
+*/
+        BooleanBuilder whereBuilder = new BooleanBuilder();
+        if(search != null) {
+            whereBuilder.and(p.name.contains(search))
+                    .or(pd.description.contains(search));
+        }
 
         JPQLQuery<ProductResQdsl> query = jpaQueryFactory
                 .select(Projections.bean(ProductResQdsl.class,
@@ -52,6 +64,11 @@ public class ProductQdsl {
                 .join(p.providerEntity, pv)
 //                .orderBy(p.number.desc())
                 .orderBy(getAllOrderSpecifiers(pageable))
+//                .where(p.name.eq(search)) //eq는 라이크문 아니고 완벽히 똑같아야함
+//                .where(p.name.contains(search))//%search% 가 포함됨 (like문)
+                  .where(whereBuilder)
+//                .where(p.name.like(search+"%")) //like문)
+//                .where(p.name.like("%"+search)) //like문)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize());
 
